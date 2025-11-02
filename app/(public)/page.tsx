@@ -1,6 +1,7 @@
 import style from "./page.module.css";
 import { getMembersList } from "../_libs/microcms";
 import { MEMBERS_LIST_LIMIT } from "../_constants";
+import Image from "next/image";
 
 export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
@@ -46,7 +47,7 @@ export default async function Page() {
        </div>
       </div>
 
-      <h2 style={{ textAlign: "center", color: "var(--color-main)", marginBottom: "var(--spacing-md)" }}>人気の講座</h2>
+      <h2 className="page-heading-title">人気の講座</h2>
       <div className="features-grid">
        <div className="card course-card">
         <div className="course-thumbnail">
@@ -77,16 +78,18 @@ export default async function Page() {
        </div>
       </div>
 
-      <h2 style={{ textAlign: "center", color: "var(--color-main)", marginBottom: "var(--spacing-md)" }}>運営メンバー</h2>
+      <h2 className="page-heading-title">運営メンバー</h2>
       <ul className={style.memberList}>
         {data.contents.map((member) => (
           <li className={`${style.memberCard} card`} key={member.id}>
             <div className={style.memberHeader}>
               <div className={style.memberImage}>
                 {member.image && (
-                  <img
+                  <Image
                     src={member.image.url}
                     alt={member.name}
+                    width={120}
+                    height={120}
                   />
                 )}
               </div>
@@ -95,7 +98,11 @@ export default async function Page() {
                 <h3 className={style.memberTitle}>{member.name}</h3>
               </div>
             </div>
-            <p className={style.memberProfile}>{member.profile}</p>
+              <div 
+              className={style.memberProfile}
+              dangerouslySetInnerHTML={{
+                __html: `${member.profile}`,
+              }} />
         </li>
         ))}
       </ul>

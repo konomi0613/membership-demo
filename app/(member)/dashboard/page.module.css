@@ -1,10 +1,4 @@
 
-.title{
-    color: var(--color-main);
-    margin-bottom: var(--spacing-md);
-    font-size: 1.5rem;
-    font-weight: 600;
-}
 .newsTitle{
     font-size: 1rem;
     color: var(--color-main);
@@ -17,7 +11,15 @@
 }
 
 .announcementContent {
-    flex: 1;
+    display: flex;
+    gap: 1rem;
+}
+.announcementImage{
+    max-width: 100px;
+    object-fit: cover;
+    height: auto;
+    aspect-ratio: 3/2;
+    border-radius: 0.5rem;
 }
 
 .announcementBadge {

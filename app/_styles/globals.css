@@ -698,3 +698,10 @@
     max-width: 1080px;
     margin: 2.5rem auto;
 }
+
+.page-heading-title{
+    color: var(--color-main);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.5rem;
+    font-weight: 600;
+}

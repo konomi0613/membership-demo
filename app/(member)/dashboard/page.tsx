@@ -1,7 +1,10 @@
 // ログイン直後のホーム画面
 // 最近の講座、お知らせ、進捗サマリーなど
 
+import { getNewsList } from '@/app/_libs/microcms';
 import style from './page.module.css';
+import Image from 'next/image';
+import { MYPAGE_NEWS_LIMIT } from '@/app/_constants';
 
 type News = {
   id: string;
@@ -59,15 +62,15 @@ const data: {
 ]
 }
 
-function page() {
-  const sliceData = data.contents.slice(0, 3);
+async function page() {
+  const newsList = await getNewsList({ limit: MYPAGE_NEWS_LIMIT, orders: '-publishedAt' });
   return (
     < >
        <div className="card" style={{marginBottom: 'var(--spacing-lg)'}}>
        <h2 style={{color: 'var(--color-main)', marginBottom: 'var(--spacing-xs)'}}>田中さん、ようこそ</h2>
        <p style={{color: 'var(--color-medium-gray)'}}>今日も学習を続けましょう</p>
       </div>
-      <h2 className={style.title}>受講中の講座</h2>
+      <h2 className="page-heading-title">受講中の講座</h2>
       <div className="grid-2 mb-lg">
        <div className="card">
         <div className="flex-between">
@@ -100,16 +103,30 @@ function page() {
         </div><a href="#" className="btn btn-primary" style={{marginTop: 'var(--spacing-sm)'}}>続きを見る</a>
        </div>
       </div>
-      <h2 className={style.title}>お知らせ</h2>
+      <h2 className="page-heading-title">お知らせ</h2>
       <ul className={style.announcementsList}>
-        { sliceData.map(( content ) => 
+        { newsList.contents.map(( content ) => 
         <li key={content.id} className={`${style.announcementItem} card`}>
-          <div style={{fontSize: '12px', color: 'var(--color-medium-gray)', marginBottom: 'var(--spacing-xs)'}}>
-          {content.publishedAt}
-          </div>
           <div className={style.announcementContent}>
-          <h3 className={style.newsTitle}>{content.title}</h3>
-          <p className={style.announcementText}>{content.text}</p>
+            {
+              content.thumbnail ? (
+              <Image
+                src={content.thumbnail.url}
+                alt={content.title}
+                width={300}
+                height={200}
+                className={style.announcementImage}
+              />
+            ) : (
+              <Image src="/noimage.jpg" alt="noimage" width={100} height={100} className={style.announcementImage} />
+            )
+            }
+            <div>
+              <div style={{fontSize: '12px', color: 'var(--color-medium-gray)', marginBottom: 'var(--spacing-xs)'}}>
+              {content.publishedAt}
+              </div>
+              <h3 className={style.newsTitle}>{content.title}</h3>
+            </div>
           </div>
           <div className={style.announcementBadge}>
           {content.category?.name}

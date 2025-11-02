@@ -11,18 +11,15 @@ export type Member = {
 
 export type Category = {
     name: string;
-}
+} & MicroCMSListContent
 
 export type News = {
-    id: string;
     title: string;
-    text: string;
-    category: {
-        name : string;
-    }
-    publishedAt: string;
-    createdAt: string;
-}
+    category: Category
+    thumbnail?: MicroCMSImage;
+    content: string;
+} & MicroCMSListContent
+
 
 if(!process.env.MICROCMS_SERVICE_DOMAIN){
     throw new Error("MICROCMS_SERVICE_DOMAIN is not defined");
@@ -39,6 +36,14 @@ const client = createClient({
 export const getMembersList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Member>({ 
         endpoint: "members",
+        queries,
+    });
+    return listData;
+}
+
+export const getNewsList = async (queries?: MicroCMSQueries) => {
+    const listData = await client.getList<News>({
+        endpoint: "news",
         queries,
     });
     return listData;
