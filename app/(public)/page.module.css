@@ -1,0 +1,29 @@
+.memberList{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+.memberCard{
+  padding: 1.5rem;  
+}
+.memberHeader{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.memberImage img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 8px;
+} 
+.memberPosition {
+  font-size: 14px;
+  color: #666666;
+}
+.memberTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
