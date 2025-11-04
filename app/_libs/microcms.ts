@@ -1,12 +1,12 @@
 import { createClient, MicroCMSImage, MicroCMSListContent, MicroCMSQueries } from "microcms-js-sdk";
 
-
 export type Member = {
     id: string;
     name: string;
     position: string;
     profile: string;
-    image: MicroCMSImage;
+    image?: MicroCMSImage;
+    video?: string
 } & MicroCMSListContent;
 
 export type Category = {
