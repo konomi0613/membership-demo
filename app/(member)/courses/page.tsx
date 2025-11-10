@@ -5,7 +5,7 @@ function page() {
     <>
       <h1 className='page-heading-title'>コース一覧</h1>
       <div className="category-grid">
-       <div className="card category-tile">
+       <div className="card -hover category-tile">
         <div className="category-icon">
          🏗️
         </div>
@@ -14,7 +14,7 @@ function page() {
         <div style={{ marginTop: 'var(--spacing-sm)' }} ><span className="course-count">8講座</span>
         </div>
        </div>
-       <div className="card category-tile">
+       <div className="card -hover category-tile">
         <div className="category-icon">
          🎨
         </div>
@@ -23,7 +23,7 @@ function page() {
         <div style={{ marginTop: 'var(--spacing-sm)' }}><span className="course-count">12講座</span>
         </div>
        </div>
-       <div className="card category-tile">
+       <div className="card -hover category-tile">
         <div className="category-icon">
          ⚙️
         </div>
@@ -32,7 +32,7 @@ function page() {
         <div style={{ marginTop: 'var(--spacing-sm)' }}><span className="course-count">15講座</span>
         </div>
        </div>
-       <div className="card category-tile">
+       <div className="card -hover category-tile">
         <div className="category-icon">
          💰
         </div>

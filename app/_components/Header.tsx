@@ -9,7 +9,8 @@ function Header() {
         { process.env.LOGIN_STATUS  ? (
         <>
             <ul className="nav-links">
-                <li><Link href="/guide">講座案内</Link></li>
+                <li><Link href="/guide">受講案内</Link></li>
+                <li><Link href="/news">お知らせ</Link></li>
                 <li><Link href="/courses">講座一覧</Link></li>
                 <li><Link href="/dashboard">マイページ</Link></li>
             </ul>

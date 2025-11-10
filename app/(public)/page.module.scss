@@ -1,0 +1,97 @@
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-light-gray) 100%);
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    border-radius: var(--border-radius-large);
+    margin-bottom: var(--spacing-lg);
+}
+
+.hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-main);
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero p {
+    color: var(--color-medium-gray);
+    margin-bottom: var(--spacing-md);
+}
+
+.heroActions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Feature Grid */
+.featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.featureCard {
+    text-align: center;
+    padding: var(--spacing-md);
+}
+
+.featureIcon {
+    width: 60px;
+    height: 60px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-sm);
+    font-size: 24px;
+    color: var(--color-white);
+}
+
+/* Pricing Cards */
+.pricingGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pricingCard {
+    text-align: center;
+    position: relative;
+}
+
+.featured {
+    border: 3px solid var(--color-accent);
+    transform: scale(1.02);
+}
+
+.price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: var(--spacing-sm) 0;
+}
+
+.featureList {
+    list-style: none;
+    margin-bottom: var(--spacing-md);
+}
+
+.featureList li {
+    padding: var(--spacing-xs) 0;
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+.featureList li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
+}

@@ -1,10 +1,7 @@
 import { getMembersList } from "@/app/_libs/microcms";
-import style from "./page.module.css";
+import style from "./page.module.scss";
 import Image from "next/image";
 import { MEMBERS_LIST_LIMIT } from "@/app/_constants";
-import guide1 from "@/public/guide1.png";
-import guide2 from "@/public/guide2.png";
-import guide3 from "@/public/guide3.png";
 
 export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
@@ -17,7 +14,6 @@ export default async function Page() {
 
   return (
     <>
-    
     <div className="page-container">
       <section className="page-section">
         <h2 className="page-heading-title">主催挨拶</h2>

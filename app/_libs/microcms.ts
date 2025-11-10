@@ -1,3 +1,18 @@
+// 保守性とシンプルさのバランスを考えて1ファイルにまとめる
+
+// こうなったら分割を検討：
+// 型が10個以上になった
+// 関数が10個以上になった
+// 複雑なロジックが入ってきた
+
+// 分割するなら
+// _libs/
+// ├── microcms/
+// │   ├── client.ts       # clientの初期化
+// │   ├── types.ts        # 型定義
+// │   ├── members.ts      # メンバー関連の関数
+// │   └── news.ts         # ニュース関連の関数
+
 import { createClient, MicroCMSImage, MicroCMSListContent, MicroCMSQueries } from "microcms-js-sdk";
 
 export type Member = {
@@ -47,4 +62,13 @@ export const getNewsList = async (queries?: MicroCMSQueries) => {
         queries,
     });
     return listData;
+}
+
+export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries) => {
+    const detailData = await client.getListDetail<News>({
+        endpoint: "news",
+        contentId,
+        queries,
+    });
+    return detailData;
 }
