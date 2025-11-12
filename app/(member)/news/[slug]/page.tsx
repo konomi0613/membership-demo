@@ -4,19 +4,18 @@ import Image from "next/image";
 import { formatDate } from "@/app/_libs/utils";
 import { RxTimer, RxUpdate } from "react-icons/rx";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { SlugPageProps } from "@/app/_libs/types";
 
-type Props = {
-    params: Promise<{ slug: string }> 
-}
-
-export default async function Page(props: Props) {
+export default async function Page(props: SlugPageProps) {
     const params = await props.params;
-    const news = await getNewsDetail(params.slug);
-    if (!news) notFound();
-  return (
+    const news = await getNewsDetail(params.slug).catch(notFound);
+
+return (
 <article className={`${styles.newsArticle} p-6 md:p-8`}>
       <header className={styles.header}>
-        <div className={styles.meta}>
+        <Link className={styles.meta}
+        href={`/news/category/${news.category.id}`}>
           {news.category.name && (
             <div className="news-badge" >
               {news.category.name}
@@ -32,7 +31,7 @@ export default async function Page(props: Props) {
               </time>
             )}
           </div>
-        </div>
+        </Link>
 
         <h1 className={styles.title}>{news.title}</h1>
 

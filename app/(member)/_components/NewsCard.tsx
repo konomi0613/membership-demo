@@ -23,15 +23,15 @@ export const NewsCard = ({ news }: { news: News }) => {
             )
             }
             <div>
-              <div className="text-[12px] text-[var(--color-medium-gray)] mb-[var(--spacing-xs)]">
+              <div className="flex items-center gap-[0.25rem] text-[13px] text-[var(--color-medium-gray)] mb-[var(--spacing-xs)]">
               <RxTimer /> {formatDate(news.publishedAt ? news.publishedAt : news.createdAt)}
               </div>
               <h3 className={style.newsTitle}>{news.title}</h3>
             </div>
           </Link>
-          <div className={`news-badge ${style.newsBadge}`}>
+          <Link href={`/news/category/${news.category?.id}`} className={`news-badge ${style.newsBadge}`}>
           {news.category?.name}
-          </div>
+          </Link>
         </li>
   )
 }
