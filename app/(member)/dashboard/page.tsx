@@ -11,7 +11,7 @@ async function page() {
     < >
        <div className="card mt-[var(--spacing-lg)]">
        <h2 className="text-[var(--color-main)] mb-[var(--spacing-xs)]">田中さん、ようこそ</h2>
-       <p className="text-[var(--color-medium-gray)]">今日も学習を続けましょう</p>
+       <p className="text-[var(--color-medium-gray)]">こんにちは！学習は継続が大事。今日も頑張りましょう。</p>
       </div>
       <h2 className="page-heading-title text-xs">受講中の講座</h2>
       <div className="grid-2 mb-lg">

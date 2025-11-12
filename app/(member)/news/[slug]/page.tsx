@@ -3,6 +3,7 @@ import styles from './page.module.scss'
 import Image from "next/image";
 import { formatDate } from "@/app/_libs/utils";
 import { RxTimer, RxUpdate } from "react-icons/rx";
+import { notFound } from "next/navigation";
 
 type Props = {
     params: Promise<{ slug: string }> 
@@ -11,11 +12,7 @@ type Props = {
 export default async function Page(props: Props) {
     const params = await props.params;
     const news = await getNewsDetail(params.slug);
-
-    if (!news) {
-        return <div>お知らせが見つかりません。</div>;
-    }
-
+    if (!news) notFound();
   return (
 <article className={`${styles.newsArticle} p-6 md:p-8`}>
       <header className={styles.header}>
