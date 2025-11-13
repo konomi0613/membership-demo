@@ -1,18 +1,29 @@
 import NewsCard from '@/app/(member)/_components/NewsCard';
+import Pagination from '@/app/(member)/_components/Pagination';
 import { NEWS_LIMIT } from '@/app/_constants';
 import { getCategoryDetail, getNewsList } from '@/app/_libs/microcms';
-import { SlugPageProps } from '@/app/_libs/types';
+import { ListPageProps, SlugPageProps } from '@/app/_libs/types';
 import { notFound } from 'next/navigation';
 
+export default async function Page( { params, searchParams } : SlugPageProps & ListPageProps ) {
+    const [categoryParams, pageParams] = await Promise.all([
+      params,
+      searchParams
+    ]);
 
-export default async function Page(props: SlugPageProps) {
-  const params = await props.params;
-  const category = await getCategoryDetail(params.id).catch(notFound);
+    const currentPage = Number(pageParams.page) || 1;
+    const offset = (currentPage - 1) * NEWS_LIMIT;
 
-  const newsList = await getNewsList({
-    limit: NEWS_LIMIT,
-    filters: `category[equals]${params.id}`,
-  })
+    const category = await getCategoryDetail(categoryParams.id).catch(notFound);
+
+    const newsList = await getNewsList({
+      limit: NEWS_LIMIT,
+      filters: `category[equals]${category.id}`,
+      offset
+    })
+
+    // 総ページ数を計算
+    const totalPages = Math.ceil(newsList.totalCount / NEWS_LIMIT);
 
   return (
     <>
@@ -22,6 +33,11 @@ export default async function Page(props: SlugPageProps) {
         <NewsCard key={content.id} news={content} />
     )}
     </ul>
+    <Pagination 
+    currentPage={currentPage} 
+    totalPages={totalPages}
+    basePath={`/news/category/${categoryParams.id}`}
+    />
     </>
   )
 }
