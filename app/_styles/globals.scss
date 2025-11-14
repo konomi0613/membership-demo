@@ -380,7 +380,7 @@ body {
 .category-icon {
     width: 80px;
     height: 80px;
-    background: var(--color-highlight);
+    background: var(--color-main);
     border-radius: var(--border-radius-large);
     display: flex;
     align-items: center;
@@ -528,4 +528,117 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
 
+}
+
+
+.rich-editor{
+    /* 見出し（ネスト1） */
+    h1,
+    h2,
+    h3{
+    margin: 28px 0 12px;
+    font-weight: 700;
+    line-height: 1.25;
+    }
+    h1{ font-size: 1.5rem; }
+    h2{ font-size: 1.25rem; }
+    h3{ font-size: 1.05rem; }
+
+    /* 段落・リスト・リンク */
+    p{ margin: 12px 0; color: #334155; }
+    ul,
+    ol{ margin: 1.5rem 0 1.5rem 0.5rem; }
+    li{ margin: 6px 0; }
+    a{ color: var(--accent); text-decoration: underline; }
+
+    ul li{
+    position: relative;
+    padding-left: 0.75rem;
+    &::before{
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.8em;
+        width: 5px;
+        height: 5px;
+        border-radius: 100px;
+        background-color: var(--color-accent);
+    }
+    }
+    ol {
+    counter-reset: item;
+    margin: 1rem 0;
+    padding-left: 0.5rem;
+    li {
+        counter-increment: item;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+        padding-left: 1.25rem;
+        position: relative;
+        &::before {
+            content: counter(item) ".";
+            color: var(--color-accent);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+    }
+    }
+
+
+    /* 画像・figure inside content */
+    img,
+    figure{ 
+    max-width: 100%; height: auto; display: block; margin: 14px auto;
+    border-radius: 1.25rem;
+    }
+
+    /* table */
+    table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    overflow: auto;
+    }
+    th,
+    td{
+    border: 1px solid #e6e9ef;
+    padding: 10px 12px;
+    text-align: left;
+    }
+
+    /* code block */
+    pre{
+    background: #0b1220;
+    color: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;     // ← x方向のみ
+    font-size: .9rem;
+
+        code {
+        background: none;
+        padding: 0;
+        border-radius: 0;
+        color: inherit;
+        display: block;
+    }
+    }
+    code{
+    background: #f1f5f9;
+    padding: .15rem .3rem;
+    border-radius: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+    font-size: .92rem;
+    }
+
+    /* blockquote */
+    blockquote{
+    border-left: 4px solid #e6eef9;
+    background: #f8fbff;
+    padding: 12px 16px;
+    margin: 14px 0;
+    color: #0b1220;
+    border-radius: 6px;
+    }
 }

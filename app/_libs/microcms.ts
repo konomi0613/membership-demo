@@ -35,6 +35,19 @@ export type News = {
     content: string;
 } & MicroCMSListContent
 
+export type Courses = {
+    title: string;
+    icon?: string;
+    description?: string;
+} & MicroCMSListContent
+
+export type Lessons = {
+    title: string;
+    detail?: string;
+    course: Courses;
+    movie?: string;
+    teacher? : Member;
+} & MicroCMSListContent
 
 if(!process.env.MICROCMS_SERVICE_DOMAIN){
     throw new Error("MICROCMS_SERVICE_DOMAIN is not defined");
@@ -48,6 +61,7 @@ const client = createClient({
     apiKey: process.env.MICROCMS_API_KEY,
 });
 
+// 運営メンバー
 export const getMembersList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<Member>({ 
         endpoint: "members",
@@ -56,6 +70,7 @@ export const getMembersList = async (queries?: MicroCMSQueries) => {
     return listData;
 }
 
+// ニュース
 export const getNewsList = async (queries?: MicroCMSQueries) => {
     const listData = await client.getList<News>({
         endpoint: "news",
@@ -63,7 +78,6 @@ export const getNewsList = async (queries?: MicroCMSQueries) => {
     });
     return listData;
 }
-
 export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries) => {
     const detailData = await client.getListDetail<News>({
         endpoint: "news",
@@ -76,6 +90,40 @@ export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries
 export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQueries) => {
     const detailData = await client.getListDetail<Category>({
         endpoint: "categories",
+        contentId,
+        queries,
+    });
+    return detailData;
+}
+
+// 講座
+export const getCouseList = async ( queries? : MicroCMSQueries ) => {
+        const listData = await client.getList<Courses>({
+        endpoint: "courses",
+        queries,
+    });
+    return listData;
+}
+export const getLessonsList = async ( queries? : MicroCMSQueries ) => {
+        const listData = await client.getList<Lessons>({
+        endpoint: "lessons",
+        queries,
+    });
+    return listData;
+}
+
+export const getCourseDetail = async( contentId: string, queries?: MicroCMSQueries ) => {
+    const detailData = await client.getListDetail<Courses>({
+        endpoint: "courses",
+        contentId,
+        queries,
+    });
+    return detailData;
+}
+
+export const getLessonDetail = async( contentId: string, queries?: MicroCMSQueries ) => {
+    const detailData = await client.getListDetail<Lessons>({
+        endpoint: "lessons",
         contentId,
         queries,
     });

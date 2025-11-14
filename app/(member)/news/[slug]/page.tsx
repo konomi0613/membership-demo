@@ -51,7 +51,7 @@ return (
 
         { news.content ? (
             <section 
-            className={styles.content}
+            className={`rich-editor ${styles.content}`}
             dangerouslySetInnerHTML={{
                 __html: `${news.content}`,
             }} />
