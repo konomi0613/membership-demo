@@ -39,6 +39,7 @@ export type Courses = {
     title: string;
     icon?: string;
     description?: string;
+    popular: boolean;
 } & MicroCMSListContent
 
 export type Lessons = {
@@ -97,7 +98,7 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
 }
 
 // 講座
-export const getCouseList = async ( queries? : MicroCMSQueries ) => {
+export const getCourseList = async ( queries? : MicroCMSQueries ) => {
         const listData = await client.getList<Courses>({
         endpoint: "courses",
         queries,

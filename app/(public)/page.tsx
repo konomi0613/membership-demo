@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { getCourseList } from "../_libs/microcms";
 import style from "./page.module.scss";
 
 export const metadata = {
@@ -8,6 +10,11 @@ export default async function Page() {
       const toggleFAQ = () => {   
         return null
       }
+
+      const popularCourse = await getCourseList({
+        filters: "popular[equals]true"
+      }).catch(notFound)
+
   return (
     <>
     
@@ -48,33 +55,23 @@ export default async function Page() {
 
       <h2 className="page-heading-title">人気の講座</h2>
       <div className={style.featuresGrid}>
-        <div className="card -hover course-card">
+        { popularCourse.contents.map((content) => (
+        <div 
+        key={content.id}
+        className="card -hover course-card">
           <div className="course-thumbnail">
-          🏗️
+          {content.icon}
           </div>
-          <h3 className="course-title">環境構築とセットアップ</h3>
-          <p>開発環境の構築から始めよう</p>
-          <div className="course-meta"><span className="tag beginner">初級</span> <span>234名受講中</span>
+          <h3 className="course-title">{content.title}</h3>
+          {content.description && (
+            <p>{content.description}</p>
+          )}
+          <div className="course-meta"><span className="tag beginner">初級</span>
           </div>
         </div>
-        <div className={ process.env.LOGIN_STATUS ? "card -hover course-card" : "card course-card locked" }>
-          <div className="course-thumbnail">
-          🎨
-          </div>
-          <h3 className="course-title">デザインシステム構築</h3>
-          <p>再利用可能なコンポーネント設計</p>
-          <div className="course-meta"><span className="tag intermediate">中級</span> <span>156名受講中</span>
-          </div>
-        </div>
-        <div className={ process.env.LOGIN_STATUS ? "card -hover course-card" : "card course-card locked" }>
-          <div className="course-thumbnail">
-          💰
-          </div>
-          <h3 className="course-title">テーマ販売戦略</h3>
-          <p>マーケットプレイスでの販売方法</p>
-          <div className="course-meta"><span className="tag advanced">上級</span> <span>89名受講中</span>
-          </div>
-        </div>
+        ))  }
+
+        
         </div>
       </div>
 

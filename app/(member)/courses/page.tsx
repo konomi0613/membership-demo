@@ -1,9 +1,9 @@
-import { getCouseList, getLessonsList } from "@/app/_libs/microcms"
+import { getCourseList, getLessonsList } from "@/app/_libs/microcms"
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function Page() {
-  const courses = await getCouseList().catch(notFound);
+  const courses = await getCourseList().catch(notFound);
 
   // 各コースごとにレッスン数を取得
   const coursesWithLessonCount = await Promise.all(
@@ -26,7 +26,7 @@ async function Page() {
         <Link 
         href={`/courses/${content.id}`}
         key={content.id} className="card -hover category-tile">
-          <div className="category-icon">
+          <div className="course-thumbnail">
           {content.icon}
           </div>
           <h3>{content.title}</h3>
