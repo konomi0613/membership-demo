@@ -1,16 +1,13 @@
 import { notFound } from "next/navigation";
 import { getCourseList } from "../_libs/microcms";
 import style from "./page.module.scss";
+import FaqItem from "../(member)/_components/FaqItem";
 
 export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
 };
 
 export default async function Page() {
-      const toggleFAQ = () => {   
-        return null
-      }
-
       const popularCourse = await getCourseList({
         filters: "popular[equals]true"
       }).catch(notFound)
@@ -105,16 +102,18 @@ export default async function Page() {
       </div>
 
       <h2 id="faq" className="page-heading-title">よくある質問</h2>
-      <div className="faq-item"><button className="faq-question"> プランの変更はいつでも可能ですか？ <span>+</span> </button>
-       <div className="faq-answer">
-        はい、いつでもプランの変更が可能です。アップグレードは即座に反映され、ダウングレードは次回請求日から適用されます。
-       </div>
-      </div>
-      <div className="faq-item"><button className="faq-question" > 無料体験期間はありますか？ <span>+</span> </button>
-       <div className="faq-answer">
-        プレミアムプランには7日間の無料体験期間があります。クレジットカード登録は必要ですが、体験期間中に解約すれば料金は発生しません。
-       </div>
-      </div>   
+      <FaqItem 
+      id="1"
+      question="プランの変更はいつでも可能ですか？"
+      answer="はい、いつでもプランの変更が可能です。アップグレードは即座に反映され、ダウングレードは次回請求日から適用されます。"
+      />
+      <FaqItem 
+      id="1"
+      question="無料体験期間はありますか？"
+      answer="プレミアムプランには7日間の無料体験期間があります。クレジットカード登録は必要ですが、体験期間中に解約すれば料金は発生しません。"
+      />
+
+ 
   </>
 
   );

@@ -1,0 +1,44 @@
+/* FAQ */
+.item {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+
+
+}
+
+.question {
+    padding: var(--spacing-md);
+    background: var(--color-white);
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.answer {
+  color: var(--color-medium-gray);
+  padding: 0 var(--spacing-md);
+  display: grid;
+  grid-template-rows: 0fr;  // ← 閉じた状態
+  transition: grid-template-rows 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+  
+  > div {
+    overflow: hidden;
+  }
+  
+  &.isOpen {
+    padding: 0 var(--spacing-md) var(--spacing-md);
+    grid-template-rows: 1fr;  // ← 開いた状態
+  }
+}
