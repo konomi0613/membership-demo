@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WordPressテーマ開発講座 会員システム
 
-## Getting Started
+オンライン講座の会員向けプラットフォームのデモサイトです。
+講座の視聴、進捗管理、プラン管理機能を実装しています。
 
-First, run the development server:
+## デモURL
+https://your-demo.netlify.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 主な機能
+- 会員登録・ログイン
+- 講座コンテンツの視聴
+- 学習進捗の管理
+- 無料/有料プラン管理
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+詳細は [FEATURES.md](./docs/FEATURES.md) を参照
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 使用技術
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### フロントエンド
+- Next.js 15（App Router）
+- TypeScript
+- CSS Modules / Tailwind CSS
 
-## Learn More
+### バックエンド
+- Supabase（認証・DB）
+- microCMS（コンテンツ管理）
+- Stripe（決済）
 
-To learn more about Next.js, take a look at the following resources:
+### デプロイ
+- Netlify
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ドキュメント
+- [全体構成](./docs/ARCHITECTURE.md)
+- [デプロイ方法](./docs/DEPLOYMENT.md)
+- [本番環境での考慮事項](./docs/PRODUCTION.md)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 技術的な工夫
+- Server Actions でバリデーション実装
+- CSS Modules と Tailwind を適材適所で使い分け
+- microCMS と Supabase でデータを分離管理
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 今後の拡張予定
+- [ ] ソーシャルログイン
+- [ ] 管理者ダッシュボード

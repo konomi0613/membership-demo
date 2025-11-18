@@ -18,6 +18,18 @@
 ### 3. 明らかに独立している
 ヘッダー、フッター、モーダルなど
 
+### 4. 'use client' を使いたい（追加）
+Server Component のメリットを活かすため
+```tsx
+// page.tsx（Server Component）
+export default function Page() {
+  return (
+    
+        {/* Client Component */}
+    
+  )
+}
+
 ---
 
 ## コンポーネント化しない
