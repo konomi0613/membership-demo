@@ -1,17 +1,16 @@
 "use client"
 import Link from 'next/link'
-import { useFormState } from 'react-dom'
-import { createContactData } from '../_actions/contact';
+import { ActionResult, createContactData } from '../_actions/contact';
 import { useActionState } from 'react';
 
-const initialState = {
+const initialState: ActionResult = {
     status: "",
     message: "",
 }
 
 function ContactForm() {
   const [state, formAction] = useActionState(createContactData, initialState);
-  console.log(state)
+  const formData = state.formData || {};
 
   if(state.status === "success") {
     return (
@@ -30,6 +29,7 @@ function ContactForm() {
               name="contact-name"
               className="form-control"
               placeholder="田中太郎"
+              defaultValue={formData['contact-name']}
             />
           </div>
 
@@ -43,6 +43,7 @@ function ContactForm() {
               name="contact-email"
               className="form-control"
               placeholder="example@email.com"
+              defaultValue={formData['contact-email']}
             />
           </div>
 
@@ -53,9 +54,10 @@ function ContactForm() {
             <select 
             id="contact-category"
             name="contact-category"
-            className="form-control">
+            className="form-control"
+            >
               <option value="">選択してください</option>
-              <option value="course">講座内容について</option>
+              <option value="course" >講座内容について</option>
               <option value="billing">料金・請求について</option>
               <option value="account">アカウントについて</option>
               <option value="other">その他</option>
@@ -72,6 +74,7 @@ function ContactForm() {
               name="contact-subject"
               className="form-control"
               placeholder="お問い合わせの件名を入力してください"
+              defaultValue={formData['contact-subject']}
             />
           </div>
 
@@ -86,6 +89,7 @@ function ContactForm() {
               rows={6}
               placeholder="詳細な内容をご記入ください。エラーメッセージがある場合は、そちらも併せてお知らせください。"
               style={{ resize: 'vertical', minHeight: '120px' }}
+              defaultValue={formData['contact-message']}
             />
           </div>
 
