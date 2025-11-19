@@ -3,6 +3,9 @@ export type SlugPageProps = {
         slug: string, 
         id: string,
      }>
+     searchParams: {
+      dk?: string;
+     }
 }
 
 export type ListPageProps = {

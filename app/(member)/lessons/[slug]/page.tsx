@@ -1,7 +1,6 @@
 import { LESSONS_LIMIT } from "@/app/_constants";
 import { getLessonDetail, getLessonsList } from "@/app/_libs/microcms"
 import { SlugPageProps } from "@/app/_libs/types";
-import Link from "next/link";
 import styles from "./page.module.scss"
 import LessonLayout from "../../_components/LessonLayout";
 

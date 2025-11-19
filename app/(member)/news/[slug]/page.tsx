@@ -9,7 +9,10 @@ import { SlugPageProps } from "@/app/_libs/types";
 
 export default async function Page(props: SlugPageProps) {
     const params = await props.params;
-    const news = await getNewsDetail(params.slug).catch(notFound);
+    const searchParams = await props.searchParams;
+    const news = await getNewsDetail(params.slug, {
+      draftKey: searchParams.dk,
+    }).catch(notFound);
 
 return (
 <article className={`${styles.newsArticle} p-6 md:p-8`}>
