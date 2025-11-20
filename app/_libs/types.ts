@@ -5,6 +5,7 @@ export type SlugPageProps = {
      }>
      searchParams: {
       dk?: string;
+      q?: string;
      }
 }
 

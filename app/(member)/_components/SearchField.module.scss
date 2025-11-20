@@ -1,0 +1,22 @@
+// page.module.scss
+.searchContainer {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-lg);
+}
+
+.searchWrapper {
+  position: relative;
+  
+  input {
+    padding-left: 48px;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--color-medium-gray);
+}

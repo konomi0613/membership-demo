@@ -368,8 +368,13 @@ body {
 /* Category Tiles */
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 250px)); // ← 最大300px
     gap: var(--spacing-md);
+    justify-content: start;
+
+    @media (max-width: 768px) {
+        justify-content: center;
+    }
 }
 
 .category-tile {
