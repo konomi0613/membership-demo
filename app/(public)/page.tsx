@@ -7,7 +7,7 @@ export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
 };
 
-export default async function Page() {
+async function HomePage() {
       const popularCourse = await getCourseList({
         filters: "popular[equals]true"
       }).catch(notFound)
@@ -118,3 +118,5 @@ export default async function Page() {
 
   );
 }
+
+export default HomePage

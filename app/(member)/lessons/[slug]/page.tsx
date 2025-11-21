@@ -4,7 +4,7 @@ import { SlugPageProps } from "@/app/_libs/types";
 import styles from "./page.module.scss"
 import LessonLayout from "../../_components/LessonLayout";
 
-async function Page( props : SlugPageProps   ) {
+async function LessonDetailPage( props : SlugPageProps   ) {
     const params = await props.params;
     const lesson = await getLessonDetail(params.slug);
     const lessons = await getLessonsList({
@@ -80,4 +80,4 @@ async function Page( props : SlugPageProps   ) {
   )
 }
 
-export default Page
+export default LessonDetailPage

@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SlugPageProps } from "@/app/_libs/types";
 
-export default async function Page(props: SlugPageProps) {
+async function NewsDetailPage(props: SlugPageProps) {
     const params = await props.params;
     const searchParams = await props.searchParams;
     const news = await getNewsDetail(params.slug, {
@@ -68,3 +68,5 @@ return (
     </article>
   )
 }
+
+export default NewsDetailPage;

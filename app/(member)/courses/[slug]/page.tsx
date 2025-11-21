@@ -3,7 +3,7 @@ import { SlugPageProps } from "@/app/_libs/types";
 import Link from "next/link";
 import LessonLayout from "../../_components/LessonLayout";
 
-async function Page( props : SlugPageProps   ) {
+async function CourseDetailPage( props : SlugPageProps   ) {
     const params = await props.params;
     const lessons = await getLessonsList({
       filters: `course[equals]${params.slug}`
@@ -32,4 +32,4 @@ async function Page( props : SlugPageProps   ) {
   )
 }
 
-export default Page
+export default CourseDetailPage

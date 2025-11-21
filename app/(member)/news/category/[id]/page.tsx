@@ -5,7 +5,7 @@ import { getCategoryDetail, getNewsList } from '@/app/_libs/microcms';
 import { ListPageProps, SlugPageProps } from '@/app/_libs/types';
 import { notFound } from 'next/navigation';
 
-export default async function Page( { params, searchParams } : SlugPageProps & ListPageProps ) {
+async function NewsCategoryPage( { params, searchParams } : SlugPageProps & ListPageProps ) {
     const [categoryParams, pageParams] = await Promise.all([
       params,
       searchParams
@@ -41,3 +41,5 @@ export default async function Page( { params, searchParams } : SlugPageProps & L
     </>
   )
 }
+
+export default NewsCategoryPage;

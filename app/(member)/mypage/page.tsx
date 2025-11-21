@@ -5,7 +5,7 @@ import { getNewsList } from '@/app/_libs/microcms';
 import { MYPAGE_NEWS_LIMIT } from '@/app/_constants';
 import NewsCard from '../_components/NewsCard';
 
-async function page() {
+async function MyPage() {
   const newsList = await getNewsList({ limit: MYPAGE_NEWS_LIMIT, orders: '-publishedAt' });
   return (
     < >
@@ -57,4 +57,4 @@ async function page() {
   )
 }
 
-export default page
+export default MyPage

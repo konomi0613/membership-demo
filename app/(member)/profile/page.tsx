@@ -1,5 +1,5 @@
 "use client"
-function page() {
+function ProfilePage() {
   return (
     <>
     <h1 className="page-heading-title">プロフィール設定</h1>
@@ -37,4 +37,4 @@ function page() {
   )
 }
 
-export default page
+export default ProfilePage

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import SearchField from "../_components/SearchField";
 
-async function Page() {
+async function CoursesPage() {
   const courses = await getCourseList().catch(notFound);
 
   // 各コースごとにレッスン数を取得
@@ -42,4 +42,4 @@ async function Page() {
   )
 }
 
-export default Page
+export default CoursesPage

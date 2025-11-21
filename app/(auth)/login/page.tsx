@@ -1,6 +1,15 @@
-import React from 'react'
+"use client"
 
-function page() {
+import { AuthResult, login } from "@/app/_actions/auth"
+import { useActionState } from "react"
+
+const initialState: AuthResult = {
+  status: "",
+  message: "",
+}
+
+function LoginPage() {
+  const [ state, formAction ] = useActionState(login, initialState)
   return (
     <>
       <div style={{ maxWidth: "400px", margin: "var(--spacing-xl) auto" }}>
@@ -8,11 +17,12 @@ function page() {
        <div className="card">
         <form data-target="handleLogin(event)">
          <div className="form-group"><label htmlFor="email">メールアドレス</label> 
-            <input type="email" id="email" className="form-control" required />
+            <input type="email" id="email" className="form-control" />
          </div>
          <div className="form-group"><label htmlFor="password">パスワード</label>
-         <input type="password" id="password" className="form-control" required />
-         </div><button type="submit" className="btn btn-primary w-[100%] mb-[var(--spacing-sm)]">ログイン</button>
+         <input type="password" id="password" className="form-control" />
+         </div>
+         <button type="submit" className="btn btn-primary w-[100%] mb-[var(--spacing-sm)]">ログイン</button>
          <p className="text-center"><a href="/signup" className="text-[var(--color-accent)]">会員登録はこちら</a></p>
         </form>
        </div>
@@ -21,4 +31,4 @@ function page() {
   )
 }
 
-export default page
+export default LoginPage

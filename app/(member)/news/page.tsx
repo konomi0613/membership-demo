@@ -4,7 +4,7 @@ import { getNewsList } from '@/app/_libs/microcms';
 import Pagination from '../_components/Pagination';
 import { ListPageProps } from '@/app/_libs/types';
 
-async function Page({ searchParams }: ListPageProps) {
+async function NewsPage({ searchParams }: ListPageProps) {
     const params = await searchParams;
     const currentPage = Number(params.page) || 1;
     
@@ -33,4 +33,4 @@ async function Page({ searchParams }: ListPageProps) {
   )
 }
 
-export default Page
+export default NewsPage

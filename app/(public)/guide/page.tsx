@@ -7,7 +7,7 @@ export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
 };
 
-export default async function Page() {
+async function GuidePage() {
   const membersList = await getMembersList({limit: MEMBERS_LIST_LIMIT});
   const owner = membersList.contents.find(m => m.id === 'a-tanaka');
   const members = membersList.contents.filter(m => m.id !== 'a-tanaka');
@@ -105,3 +105,5 @@ export default async function Page() {
 
   );
 }
+
+export default GuidePage

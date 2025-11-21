@@ -1,6 +1,6 @@
 import ContactForm from '@/app/_components/ContactForm'
 
-function Page() {
+function ContactPage() {
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto' }}>
       <div className="card" style={{ marginBottom: 'var(--spacing-lg)' }}>
@@ -15,4 +15,4 @@ function Page() {
   )
 }
 
-export default Page
+export default ContactPage

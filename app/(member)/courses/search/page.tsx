@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import SearchField from "../../_components/SearchField";
 import { SlugPageProps } from "@/app/_libs/types";
 
-async function Page( props : SlugPageProps ) {
+async function CourseSearchPage( props : SlugPageProps ) {
   const searchParams = await props.searchParams;
   const courses = await getCourseList({
     q: searchParams.q
@@ -47,4 +47,4 @@ async function Page( props : SlugPageProps ) {
   )
 }
 
-export default Page
+export default CourseSearchPage

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-function page() {
+function SignUpPage() {
   return (
     <>
     <div style={{maxWidth: '400px', margin: 'var(--spacing-xl) auto'}}>
@@ -36,4 +36,4 @@ function page() {
   )
 }
 
-export default page
+export default SignUpPage
