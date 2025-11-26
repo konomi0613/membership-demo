@@ -1,18 +1,22 @@
 import Link from "next/link"
+import { LOGIN_STATUS } from "../_constants"
+import { createClient } from "../_libs/supabase/server"
 
-function Header() {
+async function Header() {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
   return (
     <div className="navbar">
         <div className="logo">
             <Link href="/">WPテーマ講座</Link>
         </div>
-        { process.env.LOGIN_STATUS  ? (
+        { user  ? (
         <>
             <ul className="nav-links">
-                <li><Link href="/guide">受講案内</Link></li>
+                <li><Link href="/guide">初めての方へ</Link></li>
                 <li><Link href="/courses">講座一覧</Link></li>
                 <li><Link href="/mypage">マイページ</Link></li>
-                <li><Link href="/contact">お問い合わせ</Link></li>
             </ul>
             <Link href="/profile" className="user-avatar"><span>田中 花子さん</span>
                 <div className="avatar">
@@ -23,9 +27,8 @@ function Header() {
         ) : (
             <>
             <div className="hero-actions">
-                <Link href="/login" className="btn btn-ghost" id="cta-secondary">ログイン</Link>
+                <Link href="/login" className="btn btn-ghost mr-[1rem]" id="cta-secondary">ログイン</Link>
                 <Link href="/signup" className="btn btn-primary" id="cta-primary">会員登録</Link>
-                <Link href="/contact">お問い合わせ</Link>
             </div>
             </>
 
