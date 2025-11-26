@@ -21,12 +21,20 @@ export async function login(
     password: formData.get("password") as string,
   }
 
+// バリデーション
+  if (!data.email || !data.password) {
+    return {
+      status: "error",
+      message: "メールアドレスとパスワードを入力してください"
+    }
+  }
+
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
     return {
       status: "error",
-      message: "メールアドレスまたはパスワードが正しくありません",
+      message:` "メールアドレスまたはパスワードが正しくありません："  ${error}`,
     }
   }
 
