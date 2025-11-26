@@ -29,10 +29,7 @@ function ProfilePage() {
          </div><button type="submit" className="btn btn-primary">変更する</button>
         </form>
        </div>
-      </div>
-      <div className="text-center mt-[var(--spacing-lg)]">
-        <button className="btn btn-secondary">ログアウト</button>
-      </div>      
+      </div>   
     </>
   )
 }
