@@ -33,7 +33,7 @@ async function CoursesPage() {
           {content.icon}
           </div>
           <h3>{content.title}</h3>
-          <div style={{ marginTop: 'var(--spacing-sm)' }} ><span className="course-count">{content.lessonCount}講座</span></div>
+          <div className="course-meta"><span className="tag beginner">{content.lessonCount}講座</span></div>
         </Link>
       ))}
 

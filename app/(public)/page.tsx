@@ -2,15 +2,21 @@ import { notFound } from "next/navigation";
 import { getCourseList } from "../_libs/microcms";
 import style from "./page.module.scss";
 import FaqItem from "../(member)/_components/FaqItem";
+import { createClient } from "../_libs/supabase/server";
 
 export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
 };
 
 async function HomePage() {
-      const popularCourse = await getCourseList({
-        filters: "popular[equals]true"
-      }).catch(notFound)
+  const popularCourse = await getCourseList({
+    filters: "popular[equals]true"
+  }).catch(notFound)
+
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const courseCardClass = user ? "card -hover course-card" : "card -hover course-card locked";
 
   return (
     <>
@@ -55,7 +61,7 @@ async function HomePage() {
         { popularCourse.contents.map((content) => (
         <div 
         key={content.id}
-        className="card -hover course-card">
+        className={courseCardClass}>
           <div className="course-thumbnail">
           {content.icon}
           </div>
@@ -63,8 +69,6 @@ async function HomePage() {
           {content.description && (
             <p>{content.description}</p>
           )}
-          <div className="course-meta"><span className="tag beginner">初級</span>
-          </div>
         </div>
         ))  }
 
