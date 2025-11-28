@@ -1,19 +1,23 @@
-"use client"
-function ProfilePage() {
+import { createClient } from "@/app/_libs/supabase/server"
+import ProfileForm from "./_components/ProfileForm"
+
+async function ProfilePage() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  const name = user?.user_metadata?.name || ''
+  const email = user?.email || ''
+  
   return (
     <>
     <h1 className="page-heading-title">プロフィール設定</h1>
       <div className="grid-2">
        <div className="card">
         <h3 className='page-heading__3'>基本情報</h3>
-        <form>
-         <div className="form-group"><label htmlFor="name">表示名</label>
-            <input type="text" id="name" className="form-control" defaultValue="田中太郎" />
-         </div>
-         <div className="form-group"><label htmlFor="profile-email">メールアドレス</label>
-            <input type="email" id="profile-email" className="form-control" defaultValue="tanaka@example.com" readOnly style={{"background": "var(--color-background)"}} />
-         </div><button type="submit" className="btn btn-primary">更新する</button>
-        </form>
+        <ProfileForm
+        currentName={name}
+        email={email}
+        />
        </div>
        <div className="card">
         <h3 className='page-heading__3' >パスワード変更</h3>

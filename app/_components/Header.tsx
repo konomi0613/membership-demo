@@ -4,6 +4,7 @@ import { createClient } from "../_libs/supabase/server"
 async function Header() {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
+    const name = user?.user_metadata?.name || ''
 
   return (
     <div className="navbar">
@@ -17,7 +18,7 @@ async function Header() {
                 <li><Link href="/courses">講座一覧</Link></li>
                 <li><Link href="/mypage">マイページ</Link></li>
             </ul>
-            <Link href="/profile" className="user-avatar"><span>田中 花子さん</span>
+            <Link href="/profile" className="user-avatar"><span>{name}さん</span>
                 <div className="avatar">
                 田
                 </div>
