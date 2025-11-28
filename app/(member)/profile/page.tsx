@@ -1,5 +1,6 @@
 import { createClient } from "@/app/_libs/supabase/server"
 import ProfileForm from "./_components/ProfileForm"
+import PasswordForm from "./_components/PasswordForm"
 
 async function ProfilePage() {
   const supabase = await createClient()
@@ -21,17 +22,7 @@ async function ProfilePage() {
        </div>
        <div className="card">
         <h3 className='page-heading__3' >パスワード変更</h3>
-        <form>
-         <div className="form-group"><label htmlFor="current-pass">現在のパスワード</label>
-         <input type="password" id="current-pass" className="form-control" required />
-         </div>
-         <div className="form-group"><label htmlFor="new-pass">新しいパスワード</label>
-         <input type="password" id="new-pass" className="form-control" required />
-         </div>
-         <div className="form-group"><label htmlFor="confirm-pass">パスワード確認</label>
-         <input type="password" id="confirm-pass" className="form-control" required />
-         </div><button type="submit" className="btn btn-primary">変更する</button>
-        </form>
+        <PasswordForm />
        </div>
       </div>   
     </>
