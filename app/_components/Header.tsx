@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { LOGIN_STATUS } from "../_constants"
 import { createClient } from "../_libs/supabase/server"
 
 async function Header() {

@@ -1,3 +1,5 @@
+import { AuthResult } from "../_actions/auth";
+
 export type SlugPageProps = {
     params: Promise<{
         slug: string, 

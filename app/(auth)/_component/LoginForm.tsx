@@ -1,5 +1,6 @@
 "use client"
 import { AuthResult, login } from "@/app/_actions/auth"
+import FormErrorMessage from "@/app/_components/FormErrorMessage";
 import { useActionState } from "react";
 
 const initialState: AuthResult = {
@@ -28,7 +29,7 @@ function LoginForm() {
         className="form-control"
         />
         </div>
-        {state.message && <p className="mb-[1rem] text-[#DC2626]">{state.message}</p>}
+        <FormErrorMessage message={state.message} />
         <button type="submit" className="btn btn-primary w-[100%] mb-[var(--spacing-sm)]">ログイン</button>
         <p className="text-center"><a href="/signup" className="text-[var(--color-accent)]">会員登録はこちら</a></p>
     </form>

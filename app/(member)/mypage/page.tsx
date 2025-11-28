@@ -4,13 +4,19 @@
 import { getNewsList } from '@/app/_libs/microcms';
 import { MYPAGE_NEWS_LIMIT } from '@/app/_constants';
 import NewsCard from '../_components/NewsCard';
+import Link from 'next/link';
+import { createClient } from '@/app/_libs/supabase/server';
 
 async function MyPage() {
   const newsList = await getNewsList({ limit: MYPAGE_NEWS_LIMIT, orders: '-publishedAt' });
+
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const name = user?.user_metadata?.name
   return (
     < >
        <div className="card mt-[var(--spacing-lg)]">
-       <h2 className="text-[var(--color-main)] mb-[var(--spacing-xs)]">田中さん、ようこそ</h2>
+       <h2 className="text-[var(--color-main)] mb-[var(--spacing-xs)]">{name}さん、ようこそ</h2>
        <p className="text-[var(--color-medium-gray)]">こんにちは！学習は継続が大事。今日も頑張りましょう。</p>
       </div>
       <h2 className="page-heading-title text-xs">受講中の講座</h2>
@@ -52,7 +58,7 @@ async function MyPage() {
           <NewsCard key={content.id} news={content} />
         )}
       </ul>
-      <a href="/news" className="btn btn-primary mt-[var(--spacing-sm)]" >続きを見る</a>
+      <Link href="/news" className="btn btn-primary mt-[var(--spacing-sm)]" >続きを見る</Link>
      </>
   )
 }
