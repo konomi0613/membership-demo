@@ -2,6 +2,7 @@ import { getCourseDetail, getLessonsList } from "@/app/_libs/microcms"
 import { SlugPageProps } from "@/app/_libs/types";
 import Link from "next/link";
 import LessonLayout from "../../_components/LessonLayout";
+import { getCompleteCourseProgressData } from "@/app/_libs/supabase/progress";
 
 async function CourseDetailPage( props : SlugPageProps   ) {
     const params = await props.params;
@@ -9,11 +10,15 @@ async function CourseDetailPage( props : SlugPageProps   ) {
       filters: `course[equals]${params.slug}`
     });
 
-    const course = await getCourseDetail(params.slug);
+  const [course, progressData] = await Promise.all([
+    getCourseDetail(params.slug),
+    getCompleteCourseProgressData(params.slug)
+  ])
 
   return (
     <LessonLayout 
-      lessons={lessons.contents.map(l => ({ id: l.id, title: l.title }))}
+      lessons={progressData.lessons.map(l => ({ id: l.id, title: l.title }))}
+      completedLessonIds={progressData.completedLessonIds}
     >
       <div>
         <h1 className='page-heading-title'>{course.title}</h1>

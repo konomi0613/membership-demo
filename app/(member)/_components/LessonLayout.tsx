@@ -8,10 +8,10 @@ type Props = {
     children: React.ReactNode;
     lessons: Lesson[];
     currentLessonId?: string;
+    completedLessonIds: Set<string>;
 }
 
-function LessonLayout( { children, lessons, currentLessonId } : Props ) {
-
+function LessonLayout( { children, lessons, currentLessonId, completedLessonIds } : Props ) {
 
   return (
     <div>
@@ -20,13 +20,18 @@ function LessonLayout( { children, lessons, currentLessonId } : Props ) {
 
             <div className="sidebar">
                 <h3 style={{ color: "var(--color-accent)", fontWeight: "600"}}>レッスン一覧</h3>
-                {lessons.map((content) => (
+                {lessons.map((content) => {
+                    const isCompleted = completedLessonIds.has(content.id)
+                    const isCurrent = content.id === currentLessonId
+
+                    return (
                     <Link key={content.id}
                     href={`/lessons/${content.id}`}
-                    className={`chapter-item completed ${ content.id === currentLessonId && "bg-[var(--color-background)]" }`}>
+                    className={`chapter-item ${isCompleted ? 'completed' : ''} ${ isCurrent && "bg-[var(--color-background)]" }`}>
                     {content.title}
                     </Link>
-                ))}
+                    )
+                })}
             </div>
         </div>
     </div>

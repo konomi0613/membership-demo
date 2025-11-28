@@ -1,16 +1,24 @@
-import { LESSONS_LIMIT } from "@/app/_constants";
-import { getLessonDetail, getLessonsList } from "@/app/_libs/microcms"
+import { getLessonDetail } from "@/app/_libs/microcms"
 import { SlugPageProps } from "@/app/_libs/types";
 import styles from "./page.module.scss"
 import LessonLayout from "../../_components/LessonLayout";
+import CompleteLessonButton from "../_components/CompleteLessonButton";
+import { getCompleteCourseProgressData } from "@/app/_libs/supabase/progress";
 
 async function LessonDetailPage( props : SlugPageProps   ) {
     const params = await props.params;
-    const lesson = await getLessonDetail(params.slug);
-    const lessons = await getLessonsList({
-        limit: LESSONS_LIMIT,
-        filters: `course[equals]${lesson.course.id}`
-    });
+
+    // lessonを取得してからprogressDataを取得
+    const lessonData = await getLessonDetail(params.slug)
+    const progressData = await getCompleteCourseProgressData(lessonData.course.id)
+
+    const isCompleted = progressData.completedLessonIds.has(params.slug)
+
+    // 次のレッスンを取得
+    const currentIndex = progressData.lessons.findIndex(l => l.id === params.slug)
+    const nextLesson = progressData.lessons[currentIndex + 1] || null
+
+    // コースの進捗率
 
     // YouTube/Vimeo 両対応
     const getEmbedUrl = (url: string) => {
@@ -34,26 +42,27 @@ async function LessonDetailPage( props : SlugPageProps   ) {
 
   return (
     <LessonLayout
-      lessons={lessons.contents.map(l => ({ id: l.id, title: l.title }))}
-      currentLessonId={lesson.id}
+    lessons={progressData.lessons.map(l => ({ id: l.id, title: l.title }))}
+    currentLessonId={lessonData.id}
+    completedLessonIds={progressData.completedLessonIds}
     >
         <div>
-            <h1 className='page-heading-title'>{lesson.title}</h1>
+            <h1 className='page-heading-title'>{lessonData.title}</h1>
 
-            {lesson.detail && (
+            {lessonData.detail && (
             <div
             dangerouslySetInnerHTML= {{
-                __html: `${lesson.detail}`
+                __html: `${lessonData.detail}`
             }}
             style={{ color: "var(--color-medium-gray)", marginBottom: "var(--spacing-md)" }}
             className="rich-editor"
             />
             )}
 
-            {lesson.movie && (
+            {lessonData.movie && (
             <div className={styles.videoWrapper}>
                 <iframe
-                src={getEmbedUrl(lesson.movie)}
+                src={getEmbedUrl(lessonData.movie)}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 />
@@ -62,19 +71,22 @@ async function LessonDetailPage( props : SlugPageProps   ) {
 
             <div className="flex-between mb-md">
             <div>
-            <h3>{lesson.course.title}</h3>
-            <p style={{color: "var(--color-medium-gray)"}} >{lesson.course.description}</p>
+            <h3>{lessonData.course.title}</h3>
+            <p style={{color: "var(--color-medium-gray)"}} >{lessonData.course.description}</p>
             </div>
             <div className='text-right'>
-            <div className='text-xs text-medium-gray' style={{color: "var(--color-medium-gray)", fontSize: "14px"}}>
-            進捗
-            </div>
+            
             <div style={{ color: "var(--color-accent)", fontWeight: "600", fontSize: "1.5rem" }}>
-            70%
+            <span className='text-xs text-medium-gray' style={{color: "var(--color-medium-gray)", fontSize: "14px"}}>コースの進捗：</span> {progressData.percentage}%
             </div>
             </div>
             </div>
-            <a href="#" className="btn btn-primary">レッスンを完了する</a>
+            <CompleteLessonButton
+            lessonId={params.slug} 
+            courseId={lessonData.course.id}
+            isCompleted={isCompleted}
+            nextLessonId={nextLesson?.id}
+            />
         </div>
     </LessonLayout>
   )
