@@ -1,7 +1,22 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { createNextAuthMiddleware } from 'nextjs-basic-auth-middleware';
+
+const basicAuthMiddleware = createNextAuthMiddleware();
+
 
 export async function middleware(request: NextRequest) {
+
+  // 1. Basic認証チェック（有効な場合のみ）
+  if (process.env.BASIC_AUTH_ENABLED === "true") {
+    const basicAuthResponse = basicAuthMiddleware(request);
+    
+    if (basicAuthResponse.status === 401) {
+      return basicAuthResponse;
+    }
+  }
+
+  // 2. Supabaseのセッション管理
   let response = NextResponse.next({
     request: {
       headers: request.headers,

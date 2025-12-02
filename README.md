@@ -6,6 +6,10 @@
 ## デモURL
 https://your-demo.netlify.app
 
+### Basic認証情報
+- **ユーザー名**: `admin`
+- **パスワード**: `demo2025`
+
 ## 主な機能
 - 会員登録・ログイン
 - 講座コンテンツの視聴
