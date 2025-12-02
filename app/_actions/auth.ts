@@ -17,25 +17,26 @@ export async function login(
 ): Promise<AuthResult> {
   const supabase = await createClient()
 
-  const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-  }
+  const email = formData.get("email")
+  const password = formData.get("password")
 
-    // バリデーション
-  if (!data.email || !data.password) {
+  // バリデーション
+  if (!email || typeof email !== 'string' || !password || typeof password !== 'string') {
     return {
       status: "error",
       message: "メールアドレスとパスワードを入力してください"
     }
   }
 
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
 
   if (error) {
     return {
       status: "error",
-      message:` "メールアドレスまたはパスワードが正しくありません："  ${error}`,
+      message: "メールアドレスまたはパスワードが正しくありません",
     }
   }
 
@@ -51,14 +52,14 @@ export async function signup(
   const supabase = await createClient()
 
   // フォームデータの取得
-  const name = formData.get("signup-name") as string
-  const email = formData.get("signup-email") as string
-  const password = formData.get("signup-password") as string
-  const passwordConfirm = formData.get("signup-password-confirm") as string
-  const privacyAgreement = formData.get("terms-agreement") as string 
+  const name = formData.get("signup-name")
+  const email = formData.get("signup-email")
+  const password = formData.get("signup-password")
+  const passwordConfirm = formData.get("signup-password-confirm")
+  const privacyAgreement = formData.get("terms-agreement")
 
-  // 1. 必須チェック
-  if (!name || name.trim() === "") {
+  // 必須チェック
+  if (!name || typeof name !== 'string' || name.trim() === "") {
     return {
       status: "error",
       message: "お名前を入力してください",
@@ -66,7 +67,7 @@ export async function signup(
     }
   }
 
-  if (!email || email.trim() === "") {
+  if (!email || typeof email !== 'string' || email.trim() === "") {
     return {
       status: "error",
       message: "メールアドレスを入力してください",
@@ -74,7 +75,7 @@ export async function signup(
     }
   }
 
-  if (!password) {
+  if (!password || typeof password !== 'string') {
     return {
       status: "error",
       message: "パスワードを入力してください",
@@ -82,7 +83,15 @@ export async function signup(
     }
   }
 
-  // 2. メールアドレス形式チェック
+  if (!passwordConfirm || typeof passwordConfirm !== 'string') {
+    return {
+      status: "error",
+      message: "パスワード確認を入力してください",
+      formData: Object.fromEntries(formData) as Record<string, string>
+    }
+  }
+
+  // メールアドレス形式チェック
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!emailPattern.test(email)) {
     return {
@@ -92,7 +101,7 @@ export async function signup(
     }
   }
 
-  // 3. パスワードの長さチェック
+  // パスワードの長さチェック
   if (password.length < 8) {
     return {
       status: "error",
@@ -101,7 +110,7 @@ export async function signup(
     }
   }
 
-  // 4. パスワード確認の一致チェック
+  // パスワード確認の一致チェック
   if (password !== passwordConfirm) {
     return {
       status: "error",
@@ -134,7 +143,7 @@ export async function signup(
   if (error) {
     return {
       status: "error",
-      message: `登録エラー: ${error.message}`,
+      message: "登録に失敗しました。しばらく経ってから再度お試しください",
     }
   }
 
