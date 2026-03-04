@@ -39,7 +39,7 @@ https://membershipdemo.netlify.app/
 
 ### 必要条件
 
-- Node.js 18.18.0 以上
+- Node.js 20.9.0 以上
 - npm
 
 ### セットアップ
