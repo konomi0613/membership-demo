@@ -37,7 +37,7 @@ Stripe（決済）← 無料（手数料のみ）
 ## 使用技術
 ```
 フロントエンド：
-- Next.js 15
+- Next.js 16
 - TypeScript
 - CSS Modules / Tailwind CSS
 
