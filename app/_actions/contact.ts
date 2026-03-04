@@ -83,22 +83,10 @@ export async function createContactData(_prevState: ActionResult, formData: Form
         }
     }
 
-    // ここで実際の送信処理（メール送信、DB保存など）
-    // ここではbackformに送信
-    const response = await fetch('https://backform.biz/api/c/8pv4p114', {
-    method: 'POST',
-    body: formData
-    })
+    // TODO: 送信先サービスを設定する
 
-    if(!response.ok){
-        return {
-            status: "error",
-            message: "送信に失敗しました。時間をおいて再度お試しください。"
-        }
-    }
-    
-    return { 
-        status: "success", 
-        message: "送信しました" 
+    return {
+        status: "success",
+        message: "送信しました"
     };
 }

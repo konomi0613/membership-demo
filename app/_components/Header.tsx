@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { createClient } from "../_libs/supabase/server"
+import SignupModal from "./SignupModal"
 
 async function Header() {
     const supabase = await createClient()
@@ -9,12 +10,12 @@ async function Header() {
   return (
     <div className="navbar">
         <div className="logo">
-            <Link href="/">WPテーマ講座</Link>
+            <Link href={user ? "/mypage" : "/"}>WPテーマ講座</Link>
         </div>
         { user  ? (
         <>
             <ul className="nav-links">
-                <li><Link href="/guide">初めての方へ</Link></li>
+                <li><Link href="/guide">講座案内</Link></li>
                 <li><Link href="/courses">講座一覧</Link></li>
                 <li><Link href="/mypage">マイページ</Link></li>
             </ul>
@@ -28,7 +29,11 @@ async function Header() {
             <>
             <div className="hero-actions">
                 <Link href="/login" className="btn btn-ghost mr-[1rem]" id="cta-secondary">ログイン</Link>
-                <Link href="/signup" className="btn btn-primary" id="cta-primary">会員登録</Link>
+                {process.env.NEXT_PUBLIC_DEMO_MODE === "true" ? (
+                  <SignupModal><button className="btn btn-primary" id="cta-primary">会員登録</button></SignupModal>
+                ) : (
+                  <Link href="/signup" className="btn btn-primary" id="cta-primary">会員登録</Link>
+                )}
             </div>
             </>
 

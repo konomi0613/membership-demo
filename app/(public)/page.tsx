@@ -3,6 +3,7 @@ import { getCourseList } from "../_libs/microcms";
 import style from "./page.module.scss";
 import FaqItem from "../(member)/_components/FaqItem";
 import { createClient } from "../_libs/supabase/server";
+import SignupModal from "../_components/SignupModal";
 
 export const metadata = {
   title: "WordPressテーマ開発講座 - 学習ポータル",
@@ -87,7 +88,11 @@ async function HomePage() {
          <li>基礎講座3つまで視聴可能</li>
          <li>コミュニティフォーラム参加</li>
          <li>基本的な学習進捗管理</li>
-        </ul><a href="/signup?plan=free" className="btn btn-secondary">無料で始める</a>
+        </ul>{process.env.NEXT_PUBLIC_DEMO_MODE === "true" ? (
+          <SignupModal><button className="btn btn-secondary">無料で始める</button></SignupModal>
+        ) : (
+          <a href="/signup?plan=free" className="btn btn-secondary">無料で始める</a>
+        )}
        </div>
        <div className={`card ${style.pricingCard} ${style.featured}`}>
         <h3>プレミアムプラン</h3>
@@ -100,8 +105,11 @@ async function HomePage() {
          <li>ソースコードダウンロード</li>
          <li>優先サポート</li>
          <li>修了証明書発行</li>
-        </ul><a href="/signup?plan=premium" className="btn btn-primary">プレミアムを始める</a> 
-        {/* プレミアムの場合、登録後に決済ページへ誘導 */}
+        </ul>{process.env.NEXT_PUBLIC_DEMO_MODE === "true" ? (
+          <SignupModal><button className="btn btn-primary">プレミアムを始める</button></SignupModal>
+        ) : (
+          <a href="/signup?plan=premium" className="btn btn-primary">プレミアムを始める</a>
+        )}
        </div>
       </div>
 

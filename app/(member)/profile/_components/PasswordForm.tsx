@@ -9,18 +9,42 @@ const initialState: PasswordResult = {
   message: "",
 }
 
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true"
+
 function PasswordForm() {
     const [state, formAction] = useActionState(updatePassword, initialState)
+
+  if (isDemoMode) {
+    return (
+      <form>
+        <div className="form-group"><label htmlFor="current-password">現在のパスワード</label>
+        <input
+        type="password" id="current-password" className="form-control" disabled />
+        </div>
+        <div className="form-group"><label htmlFor="new-password">新しいパスワード</label>
+        <input
+        type="password" id="new-password" className="form-control" disabled />
+        </div>
+        <div className="form-group"><label htmlFor="confirm-password">パスワード確認</label>
+        <input
+        type="password" id="confirm-password" className="form-control" disabled />
+        </div>
+        <button type="button" className="btn btn-inactive" disabled style={{ width: '100%', cursor: 'not-allowed', opacity: 0.5 }}>
+          パスワード変更（デモサイトのため利用不可）
+        </button>
+      </form>
+    )
+  }
 
   return (
     <form action={formAction}>
         <div className="form-group"><label htmlFor="current-pass">現在のパスワード</label>
-        <input 
+        <input
         name="current-password"
         type="password" id="current-password" className="form-control" required />
         </div>
         <div className="form-group"><label htmlFor="new-pass">新しいパスワード</label>
-        <input 
+        <input
         name="new-password"
         type="password" id="new-password" className="form-control" required />
         </div>

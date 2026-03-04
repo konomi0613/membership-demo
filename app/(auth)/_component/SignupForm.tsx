@@ -2,7 +2,8 @@
 import { AuthResult, signup } from '@/app/_actions/auth';
 import FormErrorMessage from '@/app/_components/FormErrorMessage';
 import Link from 'next/link'
-import { useActionState } from 'react';
+import { useState, useActionState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
 
 const initialState: AuthResult = {
   status: "",
@@ -12,6 +13,12 @@ const initialState: AuthResult = {
 function SignupForm() {
   const [ state, formAction ] = useActionState(signup, initialState);
   const formData = state.formData || {};
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const passwordMismatch = passwordConfirm.length > 0 && password !== passwordConfirm;
 
     // 成功時はフォームを非表示
   if (state.status === "success") {
@@ -49,22 +56,45 @@ function SignupForm() {
       type="email" id="signup-email" className="form-control" placeholder="example@email.com" />
       </div>
       <div className="form-group"><label htmlFor="signup-password">パスワード</label>
-      <input 
-      required
-      name="signup-password"
-      pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}"
-      maxLength={30}
-      defaultValue={formData['signup-password']}
-      type="password" id="signup-password" className="form-control" placeholder="英数字8文字以上で入力してください"  />
+      <div style={{ position: 'relative' }}>
+        <input
+        required
+        name="signup-password"
+        pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}"
+        maxLength={30}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        type={showPassword ? "text" : "password"} id="signup-password" className="form-control" placeholder="英数字8文字以上で入力してください" style={{ paddingRight: '40px' }} />
+        <button
+          type="button"
+          onClick={() => setShowPassword(!showPassword)}
+          aria-label={showPassword ? "パスワードを非表示" : "パスワードを表示"}
+          style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-medium-gray)', fontSize: '18px', display: 'flex', alignItems: 'center' }}
+        >
+          {showPassword ? <Eye size={18} /> : <EyeOff size={18} />}
+        </button>
+      </div>
       </div>
       <div className="form-group"><label htmlFor="signup-password-confirm">パスワード確認</label>
-      <input 
-      required
-      name="signup-password-confirm"
-      pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}"
-      maxLength={30}
-      defaultValue={formData['signup-password-confirm']}
-      type="password" id="signup-password-confirm" className="form-control" placeholder="パスワードを再入力してください" />
+      <div style={{ position: 'relative' }}>
+        <input
+        required
+        name="signup-password-confirm"
+        pattern="(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]{8,}"
+        maxLength={30}
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+        type={showPasswordConfirm ? "text" : "password"} id="signup-password-confirm" className="form-control" placeholder="パスワードを再入力してください" style={{ paddingRight: '40px' }} />
+        <button
+          type="button"
+          onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+          aria-label={showPasswordConfirm ? "パスワードを非表示" : "パスワードを表示"}
+          style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--color-medium-gray)', fontSize: '18px', display: 'flex', alignItems: 'center' }}
+        >
+          {showPasswordConfirm ? <Eye size={18} /> : <EyeOff size={18} />}
+        </button>
+      </div>
+      {passwordMismatch && <p style={{ fontSize: '12px', color: 'var(--color-error, #e74c3c)', marginTop: '4px' }}>パスワードが一致しません</p>}
       </div>
       <div className="form-group">
         <label style={{display: 'flex', alignItems: 'flex-start', gap: 'var(--spacing-xs)', cursor: 'pointer'}}>

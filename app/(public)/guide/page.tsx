@@ -37,6 +37,37 @@ async function GuidePage() {
         </div>
       </section>
 
+            <section className="page-section">
+        <h2 className="page-heading-title">講師紹介</h2>
+        <ul className={style.memberList}>
+            {members.map((member) => (
+            <li className={`${style.memberCard} card`} key={member.id}>
+                <div className={style.memberHeader}>
+                <div className={style.memberImage}>
+                    {member.image && (
+                    <Image
+                        src={member.image.url}
+                        alt={member.name}
+                        width={120}
+                        height={120}
+                    />
+                    )}
+                </div>
+                <div>
+                    <p className={style.memberPosition}>{member.position}</p>
+                    <h3 className={style.memberTitle}>{member.name}</h3>
+                </div>
+                </div>
+                <div 
+                className={style.memberProfile}
+                dangerouslySetInnerHTML={{
+                    __html: `${member.profile}`,
+                }} />
+            </li>
+            ))}
+        </ul>
+      </section>
+
       <section className="page-section">
         <h2 className="page-heading-title">講座について</h2>
         <div className={`${style.guideCard} card`}>
@@ -69,37 +100,6 @@ async function GuidePage() {
         </div>
       </section>
 
-
-      <section className="page-section">
-        <h2 className="page-heading-title">講師紹介</h2>
-        <ul className={style.memberList}>
-            {members.map((member) => (
-            <li className={`${style.memberCard} card`} key={member.id}>
-                <div className={style.memberHeader}>
-                <div className={style.memberImage}>
-                    {member.image && (
-                    <Image
-                        src={member.image.url}
-                        alt={member.name}
-                        width={120}
-                        height={120}
-                    />
-                    )}
-                </div>
-                <div>
-                    <p className={style.memberPosition}>{member.position}</p>
-                    <h3 className={style.memberTitle}>{member.name}</h3>
-                </div>
-                </div>
-                <div 
-                className={style.memberProfile}
-                dangerouslySetInnerHTML={{
-                    __html: `${member.profile}`,
-                }} />
-            </li>
-            ))}
-        </ul>
-      </section>
     </div>
   </>
 

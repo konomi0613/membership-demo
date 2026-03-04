@@ -8,9 +8,43 @@ const initialState: ActionResult = {
     message: "",
 }
 
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true"
+
 function ContactForm() {
   const [state, formAction] = useActionState(createContactData, initialState);
   const formData = state.formData || {};
+
+  if (isDemoMode) {
+    return (
+      <form>
+        <div className="form-group">
+          <label htmlFor="contact-name">お名前</label>
+          <input type="text" id="contact-name" className="form-control" disabled />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contact-email">メールアドレス</label>
+          <input type="email" id="contact-email" className="form-control" disabled />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contact-category">お問い合わせ種別</label>
+          <select id="contact-category" className="form-control" disabled>
+            <option value="">選択してください</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="contact-subject">件名</label>
+          <input type="text" id="contact-subject" className="form-control" disabled />
+        </div>
+        <div className="form-group">
+          <label htmlFor="contact-message">お問い合わせ内容</label>
+          <textarea id="contact-message" className="form-control" rows={6} disabled />
+        </div>
+        <button type="button" className="btn btn-inactive" disabled style={{ width: '100%', cursor: 'not-allowed', opacity: 0.5 }}>
+          送信する（デモサイトのため利用不可）
+        </button>
+      </form>
+    )
+  }
 
   if(state.status === "success") {
     return (
@@ -51,7 +85,7 @@ function ContactForm() {
             <label htmlFor="contact-category">
               お問い合わせ種別 <span style={{ color: '#DC2626' }}>*</span>
             </label>
-            <select 
+            <select
             id="contact-category"
             name="contact-category"
             className="form-control"
@@ -95,7 +129,7 @@ function ContactForm() {
 
           <div className="form-group">
             <label style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--spacing-xs)', cursor: 'pointer' }}>
-              <input 
+              <input
               type="checkbox"
               id="contact-privacy"
               name="contact-privacy"

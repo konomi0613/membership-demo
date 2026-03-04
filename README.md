@@ -86,9 +86,20 @@ npm run lint    # ESLint 実行
 ```
 
 ## ドキュメント
+
+### 設計・運用
 - [全体構成](./docs/ARCHITECTURE.md)
+- [機能一覧](./docs/FEATURES.md)
 - [デプロイ方法](./docs/DEPLOYMENT.md)
 - [本番環境での考慮事項](./docs/PRODUCTION.md)
+- [キャッシュ戦略](./docs/CACHING_STRATEGY.md)
+
+### 開発ルール
+- [ディレクトリ構成](./docs/directory-structure.md)
+- [コンポーネント](./docs/component-rules.md)
+- [スタイリング](./docs/styling-rules.md)
+- [型定義の配置](./docs/type-placement.md)
+- [認証パターン](./docs/auth-pattern.md)
 
 ## 技術的な工夫
 - Server Actions でバリデーション実装

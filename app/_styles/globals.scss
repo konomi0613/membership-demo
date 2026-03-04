@@ -170,8 +170,8 @@ body {
 }
 
 .btn-ghost:hover {
-    background: var(--color-accent);
-    color: var(--color-white);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-card);
 }
 
 .btn-inactive {
@@ -314,6 +314,11 @@ body {
     font-size: var(--font-size-base);
     background: var(--color-white);
     transition: border-color 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: var(--color-medium-gray);
+    opacity: 1;
 }
 
 .form-control:focus {
